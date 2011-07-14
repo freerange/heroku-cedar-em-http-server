@@ -1,1 +1,1 @@
-web: bundle exec ruby lib/loop.rb
+worker: bundle exec ruby lib/loop.rb
