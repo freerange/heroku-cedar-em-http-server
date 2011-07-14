@@ -13,7 +13,7 @@ class Handler < EventMachine::Connection
 end
 
 EventMachine::run {
-  host, port = "0.0.0.0", ENV['PORT']
+  host, port = "0.0.0.0", 8080#ENV['PORT']
   puts "Starting on #{host}:#{port}..."
   EventMachine::start_server(host, port, Handler)
 }
