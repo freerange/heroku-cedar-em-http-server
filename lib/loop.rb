@@ -1,14 +1,19 @@
-require "eventmachine"
+require 'eventmachine'
+require 'evma_httpserver'
 
-module EchoServer
-  def receive_data(data)
-    send_data(data)
+class Handler < EventMachine::Connection
+  include EventMachine::HttpServer
+
+  def process_http_request
+    resp = EventMachine::DelegatedHttpResponse.new(self)
+    resp.status = 200
+    resp.content = "Hello World!"
+    resp.send_response
   end
 end
 
-EventMachine::run do
-  host = "0.0.0.0"
-  port = ENV["PORT"]
-  EventMachine::start_server host, port, EchoServer
-  puts "Started EchoServer on #{host}:#{port}"
-end
+EventMachine::run {
+  host, port = "0.0.0.0", ENV['PORT']
+  puts "Starting on #{host}:#{port}..."
+  EventMachine::start_server(host, port, Handler)
+}
