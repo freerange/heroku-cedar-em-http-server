@@ -1,0 +1,1 @@
+worker: bundle exec ruby lib/loop.rb
