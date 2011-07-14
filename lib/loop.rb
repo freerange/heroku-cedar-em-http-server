@@ -7,7 +7,7 @@ class Handler < EventMachine::Connection
   def process_http_request
     resp = EventMachine::DelegatedHttpResponse.new(self)
     resp.status = 200
-    resp.content = "Hello World!"
+    resp.content = "This content is being served by EventMachine::HttpServer!"
     resp.send_response
   end
 end
