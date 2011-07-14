@@ -8,7 +8,7 @@ end
 
 EventMachine::run do
   host = "0.0.0.0"
-  port = 80
+  port = ENV["PORT"]
   EventMachine::start_server host, port, EchoServer
   puts "Started EchoServer on #{host}:#{port}"
 end
